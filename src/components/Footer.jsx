@@ -3,7 +3,7 @@ import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <footer className="footer footer-center bg-teal-200 text-base-content p-10 mt-16">
+    <footer className="footer footer-center border text-base-content p-10 mt-16">
       {/* Brand */}
       <aside>
         <h2 className="text-2xl font-bold">🎬 Movie Master</h2>
