@@ -1,7 +1,46 @@
-import React from "react";
-import { Link } from "react-router";
+import React, { use } from "react";
+import { Link, useNavigate } from "react-router";
+import { AuthContext } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 const Register = () => {
+  const { createUser, updateUserProfile, signInWithGoogle } = use(AuthContext);
+  const navigate = useNavigate();
+
+  const handleRegister = (event) => {
+    event.preventDefault();
+    const displayName = event.target.displayName.value;
+    const photoURL = event.target.photoURL.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+
+    toast.loading("Creating user...", { id: "create-user" });
+
+    createUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+        updateUserProfile(displayName, photoURL);
+        toast.success("User created successfully!", { id: "create-user" });
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.message, { id: "create-user" });
+      });
+  };
+
+  const handleGoogleSignIn = () => {
+    toast.loading("Creating user...", { id: "create-user" });
+    signInWithGoogle()
+      .then((result) => {
+        toast.success("User created successfully!", { id: "create-user" });
+        console.log(result.user);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.message, { id: "create-user" });
+      });
+  };
   return (
     <div>
       <h2 className="text-center font-bold text-3xl mb-2">Register Now !</h2>
@@ -14,7 +53,7 @@ const Register = () => {
           <h2 className="font-semibold text-2xl text-center">
             Register your account
           </h2>
-          <form className="card-body">
+          <form onSubmit={handleRegister} className="card-body">
             <fieldset className="fieldset">
               {/* Name field  */}
               <label className="label">Name</label>
@@ -64,7 +103,7 @@ const Register = () => {
               </button>
 
               {/* Google */}
-              <button className="btn bg-white text-black border-[#e5e5e5]">
+              <button onClick={handleGoogleSignIn} className="btn bg-white text-black border-[#e5e5e5]">
                 <svg
                   aria-label="Google logo"
                   width="16"

@@ -1,7 +1,42 @@
-import React from "react";
-import { Link } from "react-router";
+import React, { use } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
+import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
+  const { signInUser, signInWithGoogle } = use(AuthContext);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  console.log(location);
+
+  const handleLogIn = (event) => {
+    event.preventDefault();
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+
+    console.log(email, password);
+    signInUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+        event.target.reset();
+        navigate(location.state || "/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then((result) => {
+        console.log(result.user);
+        navigate(location?.state || "/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div>
       <h2 className="text-center font-bold text-3xl mb-3">Login Now !</h2>
@@ -14,7 +49,7 @@ const Login = () => {
           <h2 className="font-semibold text-2xl text-center">
             Login your account
           </h2>
-          <form className="card-body">
+          <form onSubmit={handleLogIn} className="card-body">
             <fieldset className="fieldset">
               {/* email field  */}
               <label className="label">Email</label>
@@ -46,7 +81,7 @@ const Login = () => {
               </button>
 
               {/* Google */}
-              <button className="btn bg-white text-black border-[#e5e5e5]">
+              <button onClick={handleGoogleSignIn} className="btn bg-white text-black border-[#e5e5e5]">
                 <svg
                   aria-label="Google logo"
                   width="16"
@@ -76,7 +111,7 @@ const Login = () => {
                 </svg>
                 Login with Google
               </button>
-              
+
               <p className="font-semibold text-center pt-5">
                 Dont’t Have An Account ?{" "}
                 <Link className="text-primary" to="/auth/register">
