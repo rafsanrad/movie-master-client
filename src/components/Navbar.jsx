@@ -37,7 +37,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar fixed top-0 left-0 z-50 bg-transparent text-white px-6">
+    <div className="navbar  px-6">
       {/* Navbar Start */}
       <div className="navbar-start">
         <div className="dropdown">
@@ -77,7 +77,7 @@ const Navbar = () => {
 
       {/* Navbar End */}
       <div className="navbar-end">
-        <Link to="/auth/register" className="btn btn-outline text-white hover:btn-primary">
+        <Link to="/auth/login" className="btn btn-outline  hover:btn-primary">
           Login
         </Link>
       </div>

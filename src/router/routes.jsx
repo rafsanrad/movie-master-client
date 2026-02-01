@@ -8,6 +8,7 @@ import MovieDetails from "../pages/MovieDetails";
 import Login from "../Auth/Login";
 import Register from "../Auth/Register";
 import PrivateRoute from "./PrivateRoute";
+import AuthLayout from "../layout/AuthLayout";
 
 export const router = createBrowserRouter([
   {
@@ -49,42 +50,47 @@ export const router = createBrowserRouter([
         ),
       },
 
-    //    {
-    //     path: "/my-models",
-    //     element: (
-    //       <PrivateRoute>
-    //         <MyModels />
-    //       </PrivateRoute>
-    //     ),
-    //   },
+      //    {
+      //     path: "/my-models",
+      //     element: (
+      //       <PrivateRoute>
+      //         <MyModels />
+      //       </PrivateRoute>
+      //     ),
+      //   },
 
-    //    {
-    //     path: "/my-downloads",
-    //     element: (
-    //       <PrivateRoute>
-    //         <MyDownloads />
-    //       </PrivateRoute>
-    //     ),
-    //   },
+      //    {
+      //     path: "/my-downloads",
+      //     element: (
+      //       <PrivateRoute>
+      //         <MyDownloads />
+      //       </PrivateRoute>
+      //     ),
+      //   },
 
-    //     {
-    //     path: "/update-model/:id",
-    //     element: (
-    //       <PrivateRoute>
-    //         <UpdateModel />
-    //       </PrivateRoute>
-    //     ),
-    //       loader: ({params}) => fetch(`https://3d-model-server.vercel.app/models/${params.id}`)
-    //   },
+      //     {
+      //     path: "/update-model/:id",
+      //     element: (
+      //       <PrivateRoute>
+      //         <UpdateModel />
+      //       </PrivateRoute>
+      //     ),
+      //       loader: ({params}) => fetch(`https://3d-model-server.vercel.app/models/${params.id}`)
+      //   },
+    ],
+  },
+  {
+    path: "/auth",
+    element: <AuthLayout></AuthLayout>,
+    children: [
       {
         path: "/auth/login",
-        element: <Login />,
+        element: <Login></Login>,
       },
       {
         path: "/auth/register",
-        element: <Register />,
+        element: <Register></Register>,
       },
     ],
   },
 ]);
-
