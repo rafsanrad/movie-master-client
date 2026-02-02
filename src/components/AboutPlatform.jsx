@@ -30,7 +30,7 @@ const features = [
 
 const AboutPlatform = () => {
   return (
-    <section className="py-10 bg-base-100">
+    <section className="py-10 w-11/12 mx-auto bg-base-100">
       <div className="max-w-7xl mx-auto px-6 text-center">
         <div className="mb-12 opacity-0 animate-[fadeIn_0.8s_ease-out_0.2s_forwards]">
           <h2 className="text-3xl font-bold mb-2">

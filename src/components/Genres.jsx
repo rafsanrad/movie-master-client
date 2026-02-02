@@ -13,7 +13,7 @@ const genres = [
 
 const Genres = () => {
   return (
-    <section className="py-16 bg-base-100">
+    <section className="py-16 w-11/12 mx-auto bg-base-100">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-12 opacity-0 animate-[fadeIn_0.8s_ease-out_0.3s_forwards]">
           <h2 className="text-3xl font-bold">
