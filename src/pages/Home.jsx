@@ -10,7 +10,7 @@ const Home = () => {
   console.log(data);
 
   return (
-    <div>
+    <div className="-mt-2.5">
       <Banner></Banner>
 
       <div className="text-center text-3xl font-bold mt-10">

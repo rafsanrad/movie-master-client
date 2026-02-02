@@ -9,6 +9,7 @@ import Login from "../Auth/Login";
 import Register from "../Auth/Register";
 import PrivateRoute from "./PrivateRoute";
 import AuthLayout from "../layout/AuthLayout";
+import MyMovies from "../pages/MyMovies";
 
 export const router = createBrowserRouter([
   {
@@ -18,12 +19,12 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-        loader: () => fetch('http://localhost:3000/latest-movies')
+        loader: () => fetch("http://localhost:3000/latest-movies"),
       },
       {
         path: "/all-movies",
         element: <AllMovies />,
-        loader: () => fetch('http://localhost:3000/movies')
+        loader: () => fetch("http://localhost:3000/movies"),
       },
       {
         path: "/profile",
@@ -50,14 +51,14 @@ export const router = createBrowserRouter([
         ),
       },
 
-      //    {
-      //     path: "/my-models",
-      //     element: (
-      //       <PrivateRoute>
-      //         <MyModels />
-      //       </PrivateRoute>
-      //     ),
-      //   },
+      {
+        path: "/my-movies",
+        element: (
+          <PrivateRoute>
+            <MyMovies />
+          </PrivateRoute>
+        ),
+      },
 
       //    {
       //     path: "/my-downloads",
