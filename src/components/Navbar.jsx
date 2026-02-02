@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React, { use, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
 import MyLink from "./MyLink";
 import { AuthContext } from "../context/AuthContext";
@@ -7,6 +7,17 @@ import { IoLogIn, IoLogOut } from "react-icons/io5";
 
 const Navbar = () => {
   const { user, signOutUser } = use(AuthContext);
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  useEffect(() => {
+    const html = document.querySelector("html");
+    html.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const handleTheme = (checked) => {
+    setTheme(checked ? "dark" : "light");
+  };
   const links = (
     <>
       <li>
@@ -101,6 +112,13 @@ const Navbar = () => {
               <li>
                 <Link to={"/my-movies"}>My Movies</Link>
               </li>
+
+              <input
+                onChange={(e) => handleTheme(e.target.checked)}
+                type="checkbox"
+                defaultChecked={localStorage.getItem("theme") === "dark"}
+                className="toggle mb-2"
+              />
 
               <li>
                 <button

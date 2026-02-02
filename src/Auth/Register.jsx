@@ -20,7 +20,8 @@ const Register = () => {
       .then((result) => {
         console.log(result.user);
         updateUserProfile(displayName, photoURL);
-        toast.success("User created successfully!", { id: "create-user" });
+        toast.success("User created successfully!", { id: "create-user" })
+        navigate('/auth/login');
       })
       .catch((error) => {
         console.log(error);
@@ -58,7 +59,7 @@ const Register = () => {
               {/* Name field  */}
               <label className="label">Name</label>
               <input
-                name="name"
+                name="displayName"
                 type="text"
                 className="input"
                 placeholder="Name"
@@ -68,7 +69,7 @@ const Register = () => {
               {/* Photo URL field  */}
               <label className="label">Photo URL</label>
               <input
-                name="photo"
+                name="photoURL"
                 type="text"
                 className="input"
                 placeholder="Photo URL"
