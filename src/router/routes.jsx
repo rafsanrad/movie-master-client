@@ -10,6 +10,7 @@ import Register from "../Auth/Register";
 import PrivateRoute from "./PrivateRoute";
 import AuthLayout from "../layout/AuthLayout";
 import MyMovies from "../pages/MyMovies";
+import UpdateMovie from "../pages/UpdateMovie";
 
 export const router = createBrowserRouter([
   {
@@ -69,15 +70,16 @@ export const router = createBrowserRouter([
       //     ),
       //   },
 
-      //     {
-      //     path: "/update-model/:id",
-      //     element: (
-      //       <PrivateRoute>
-      //         <UpdateModel />
-      //       </PrivateRoute>
-      //     ),
-      //       loader: ({params}) => fetch(`https://3d-model-server.vercel.app/models/${params.id}`)
-      //   },
+      {
+        path: "/update-movie/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateMovie />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/movies/${params.id}`),
+      },
     ],
   },
   {

@@ -1,7 +1,6 @@
 import { use, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import Swal from "sweetalert2";
-import toast from "react-hot-toast";
 import { AuthContext } from "../context/AuthContext";
 import LoadingSpinner from "../components/LoadingSpinner";
 
@@ -28,85 +27,40 @@ const MovieDetails = () => {
       });
   }, [user, id, refetch]);
 
-//   const handleDlete = () => {
-//     Swal.fire({
-//       title: "Are you sure?",
-//       text: "You won't be able to revert this!",
-//       icon: "warning",
-//       showCancelButton: true,
-//       confirmButtonColor: "#3085d6",
-//       cancelButtonColor: "#d33",
-//       confirmButtonText: "Yes, delete it!",
-//     }).then((result) => {
-//       if (result.isConfirmed) {
-//         fetch(`https://3d-model-server.vercel.app/models/${model._id}`, {
-//           method: "DELETE",
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//         })
-//           .then((res) => res.json())
-//           .then((data) => {
-//             console.log(data);
-//             navigate("/all-models");
+  const handleDelete = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/movies/${movie._id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            navigate("/all-movies");
 
-//             Swal.fire({
-//               title: "Deleted!",
-//               text: "Your file has been deleted.",
-//               icon: "success",
-//             });
-//           })
-//           .catch((err) => {
-//             console.log(err);
-//           });
-//       }
-//     });
-//   };
-
-//   const handleDownload = () => {
-//     const finalModel = {
-//       name: model.name,
-//       downloads: model.downloads,
-//       created_by: model.created_by,
-//       description: model.description,
-//       thumbnail: model.thumbnail,
-//       created_at: new Date(),
-//       downloaded_by: user.email,
-//     };
-
-//     fetch(`https://3d-model-server.vercel.app/downloads/${model._id}`, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(finalModel),
-//     })
-//       .then((res) => res.json())
-//       .then((data) => {
-//         console.log(data);
-//         toast.success("Successfully downloaded!");
-//         setRefecth(!refetch)
-
-//         // alternative solution of realtime download count update
-
-//     //     fetch(`https://3d-model-server.vercel.app/models/${id}`, {
-//     //   headers: {
-//     //     authorization: `Bearer ${user.accessToken}`,
-//     //   },
-//     // })
-//     //   .then((res) => res.json())
-//     //   .then((data) => {
-//     //     setModel(data.result);
-//     //     console.log(" Api called!")
-//     //     console.log(data);
-//     //     setLoading(false);
-//     //   });
-
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   };
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    });
+  };
 
   if (loading) {
     return <LoadingSpinner></LoadingSpinner>;
@@ -143,26 +97,21 @@ const MovieDetails = () => {
               {movie.plotSummary}
             </p>
 
-            {/* <div className="flex gap-3 mt-6">
+            <div className="flex gap-3 mt-6">
               <Link
-                to={`/update-model/${model._id}`}
-                className="btn btn-primary rounded-full bg-linear-to-r from-pink-500 to-red-600 text-white border-0 hover:from-pink-600 hover:to-red-700"
+                to={`/update-movie/${movie._id}`}
+                className="btn btn-primary rounded-full bg-linear-to-r from-teal-400 to-teal-600"
               >
-                Update Model
+                Update Movie
               </Link>
               <button
-                onClick={handleDownload}
-                className="btn btn-secondary rounded-full"
-              >
-                Download
-              </button>
-              <button
-                onClick={handleDlete}
-                className="btn btn-outline rounded-full border-gray-300 hover:border-pink-500 hover:text-pink-600"
+                onClick={handleDelete}
+                className="btn btn-primary rounded-full bg-linear-to-r from-teal-400 to-teal-600"
               >
                 Delete
               </button>
-            </div> */}
+            </div>
+
           </div>
         </div>
       </div>
