@@ -5,10 +5,10 @@ const Banner = () => {
 
   useEffect(() => {
     // 🔁 Replace with your real API endpoint
-    fetch("http://localhost:3000/movies")
-      .then(res => res.json())
-      .then(data => setMovies(data))
-      .catch(err => console.error(err));
+    fetch("https://movie-master-server-liart.vercel.app/movies")
+      .then((res) => res.json())
+      .then((data) => setMovies(data))
+      .catch((err) => console.error(err));
   }, []);
 
   return (
@@ -29,7 +29,6 @@ const Banner = () => {
             {/* Overlay */}
             <div className="w-full h-[80vh] bg-black/70 flex items-center">
               <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-8 items-center text-white">
-                
                 {/* Text Content */}
                 <div>
                   <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -51,9 +50,7 @@ const Banner = () => {
                   </p>
 
                   <div className="flex gap-4">
-                    <button className="btn btn-primary">
-                      Watch Trailer
-                    </button>
+                    <button className="btn btn-primary">Watch Trailer</button>
                     <button className="btn btn-outline text-white hover:text-black">
                       View Details
                     </button>

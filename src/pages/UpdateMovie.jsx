@@ -16,7 +16,7 @@ const UpdateMovie = () => {
       posterUrl: e.target.posterUrl.value,
     };
 
-    fetch(`http://localhost:3000/movies/${movie._id}`, {
+    fetch(`https://movie-master-server-liart.vercel.app/movies/${movie._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

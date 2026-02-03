@@ -10,10 +10,10 @@ const MovieDetails = () => {
   const [movie, setMovie] = useState({});
   const [loading, setLoading] = useState(true);
   const { user } = use(AuthContext);
-  const [refetch, setRefecth] = useState(false)
+  const [refetch, setRefecth] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/movies/${id}`, {
+    fetch(`https://movie-master-server-liart.vercel.app/movies/${id}`, {
       headers: {
         authorization: `Bearer ${user.accessToken}`,
       },
@@ -21,7 +21,7 @@ const MovieDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         setMovie(data.result);
-        console.log(" Api called!")
+        console.log(" Api called!");
         console.log(data);
         setLoading(false);
       });
@@ -38,12 +38,15 @@ const MovieDetails = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/movies/${movie._id}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
+        fetch(
+          `https://movie-master-server-liart.vercel.app/movies/${movie._id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
           },
-        })
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
@@ -111,7 +114,6 @@ const MovieDetails = () => {
                 Delete
               </button>
             </div>
-
           </div>
         </div>
       </div>

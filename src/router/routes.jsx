@@ -20,12 +20,14 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-        loader: () => fetch("http://localhost:3000/latest-movies"),
+        loader: () =>
+          fetch("https://movie-master-server-liart.vercel.app/latest-movies"),
       },
       {
         path: "/all-movies",
         element: <AllMovies />,
-        loader: () => fetch("http://localhost:3000/movies"),
+        loader: () =>
+          fetch("https://movie-master-server-liart.vercel.app/movies"),
       },
       {
         path: "/profile",
@@ -78,7 +80,9 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/movies/${params.id}`),
+          fetch(
+            `https://movie-master-server-liart.vercel.app/movies/${params.id}`,
+          ),
       },
     ],
   },
